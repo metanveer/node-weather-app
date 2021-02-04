@@ -10,11 +10,27 @@ const forecast = (lat, long, callback) => {
     } else if (errorApi) {
       callback("Unable to find weather forcast", undefined);
     } else {
-      const { weather_descriptions, temperature, feelslike } = current;
-      callback(
-        undefined,
-        `${weather_descriptions[0]}. It's currently ${temperature} Degrees Fahrenheit out, feels like ${feelslike} Degrees Fahrenheit.`
-      );
+      console.log(current);
+      const {
+        weather_descriptions,
+        temperature,
+        feelslike,
+        is_day,
+        precip,
+        humidity,
+      } = current;
+
+      callback(undefined, {
+        forecast1: `Now it's ${
+          is_day === "yes" ? "day" : "night"
+        } here. Overall weather condition is ${weather_descriptions[0]}`,
+        forecast2: `Outdoor temperature feels like ${feelslike}°F though actual temp. is ${temperature}°F along with humidity of ${humidity}% `,
+        forecast3: `${
+          precip === 0
+            ? `No chances of rain today :)`
+            : `Chances of rain is ${precip} Inch`
+        }`,
+      });
     }
   });
 };
