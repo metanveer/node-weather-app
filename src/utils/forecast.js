@@ -18,17 +18,20 @@ const forecast = (lat, long, callback) => {
         is_day,
         precip,
         humidity,
+        cloudcover,
       } = current;
 
       callback(undefined, {
         forecast1: `Now it's ${
           is_day === "yes" ? "day" : "night"
-        } here. Overall weather condition is ${weather_descriptions[0]}`,
-        forecast2: `Outdoor temperature feels like ${feelslike}°F though actual temp. is ${temperature}°F along with humidity of ${humidity}% `,
+        } here. Overall weather condition is ${
+          weather_descriptions[0]
+        }. Cloud covers ${cloudcover}% of the area.`,
+        forecast2: `Outdoor temperature feels like ${feelslike}°F and actual temperature is ${temperature}°F along with ${humidity}% humidity`,
         forecast3: `${
           precip === 0
-            ? `No chances of rain today :)`
-            : `Chances of rain is ${precip} Inch`
+            ? `No chances of rain today`
+            : `Appears to be rain may happen for about ${precip} inch`
         }`,
       });
     }
